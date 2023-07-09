@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  base-microservice:
+    image: base-microservice:latest
+    container_name: base-microservice
+    environment:
+      - SIDECAR_ONE_IP = base-microservice:8080
+    ports:
+      - "8080:8080"
