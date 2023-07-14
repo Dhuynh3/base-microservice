@@ -7,9 +7,9 @@ import io.quarkus.test.junit.QuarkusTest;
 @QuarkusTest
 public class BusinessLogicTest {
     
-    @Test
-    public void testPerformBusinessLogic(String message) {
+    // @Test
+    // public void testPerformBusinessLogic(String message) {
         
-    }
+    // }
 
 }

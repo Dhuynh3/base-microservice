@@ -21,19 +21,26 @@ public class Gateway {
      * This constructor is always called before the onStartup in Microservice Class
      */
     public Gateway() {
-        log.info("Gateway Constructor Called");
+        log.info("[Gateway] : Constructor Called");
     }
 
     /**
      * NOTES: The @Observes Router executes first than StartupEvent.
-     * 
      * @param route
      */
     public void initRoute(@Observes Router route) {
-        log.info("Gateway initRoute called");
-        Gateway.router = route;
-        router.route(HttpMethod.GET, "/sidecar-gateway").handler(msgHandler::handleMessage);
+        
+        // Log the route startup
+        log.info("[Gateway] : initRoute called");
 
+        // Store the route
+        Gateway.router = route;
+
+        // Required routes to setup on microservice startup
+        // "/sidecar-inbound" For adapters to send messages back
+        router.route(HttpMethod.GET, "/sidecar-inbound").handler(msgHandler::handleMessage);
+
+        // "/status" To query about the status of the microservice
         router.route(HttpMethod.GET, "/status").handler(msgHandler::handleStatus);
     }
 }

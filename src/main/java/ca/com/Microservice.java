@@ -28,11 +28,14 @@ public class Microservice {
         MessageSender send = new MessageSender.HTTPBuilder()
         .setHostname(SIDECAR_ONE_IP[0])
         .setPort(Integer.parseInt(SIDECAR_ONE_IP[1]))
-        .setURI("/sidecar-gateway")
-        .setMethod("GET").build();
+        .setURI("/microservice-inbound")
+        .setMethod("POST").build();
 
         send.sendHTTPRequest().onSuccess(event -> {
-            log.info("Successful HTTP");
+            event.send("Sending some kind of message").onSuccess(res -> {
+                log.info("HTTP Request Sent");
+            });
+            log.info("HTTP Request");
         }).onFailure(event2 -> {
             log.info("Failure " +  event2.getMessage());
         });
