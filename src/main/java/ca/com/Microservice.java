@@ -19,8 +19,8 @@ public class Microservice {
 
     Logger log = new Logger();
 
-    public static final String SIDECAR_ONE_IP[] = System.getenv().getOrDefault("SIDECAR_ONE_IP", "localhost:8080").split(":");
-    public static final String SIDECAR_TWO_IP[] = System.getenv().getOrDefault("SIDECAR_TWO_IP", "localhost:8080").split(":");
+    public static final String SIDECAR_ONE_IP[] = System.getenv().getOrDefault("SIDECAR_ONE_IP", "localhost:8081").split(":");
+    public static final String SIDECAR_TWO_IP[] = System.getenv().getOrDefault("SIDECAR_TWO_IP", "localhost:8082").split(":");
     
     public void initialization() {
         log.info("Microservice Initialization Sequence");
@@ -35,7 +35,6 @@ public class Microservice {
             log.info("Successful HTTP");
         }).onFailure(event2 -> {
             log.info("Failure " +  event2.getMessage());
-           
         });
 
     }

@@ -35,18 +35,15 @@ public class MessageSender {
 
         client = vertx.createHttpClient(httpOption);
     }
-
     public static class HTTPBuilder {
         private HttpMethod method = HttpMethod.GET;
         private String hostname;
         private String uri;
         private int port;
-
         public HTTPBuilder setHostname(String hostname) {
             this.hostname = hostname;
             return this;
         }
-
         public HTTPBuilder setURI(String uri) {
             this.uri = uri;
             return this;
@@ -56,7 +53,6 @@ public class MessageSender {
             this.port = port;
             return this;
         }
-
         public HTTPBuilder setMethod(String method) {
 
             switch (method) {
@@ -73,23 +69,24 @@ public class MessageSender {
 
             return this;
         }
-
         public MessageSender build() {
             return new MessageSender(this);
         }
     }
-
     public Future<HttpClientRequest> sendHTTPRequest() {
-
-    
-
         return client.request(reqOptions);
     }
+    /////////////////////////////////////////////////////
 
+
+    ////////////////////////////////////////////
+    /**
+     * FUTURE: GRPC SUPPORT
+     * @param builder
+     */
     public MessageSender(GRPCBuilder builder) {
 
     }
-
     public static class GRPCBuilder {
         private String hostname;
         private int port;
@@ -98,4 +95,5 @@ public class MessageSender {
             return new MessageSender(this);
         }
     }
+    ////////////////////////////////////////////
 };
