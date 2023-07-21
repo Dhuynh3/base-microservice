@@ -3,8 +3,16 @@ services:
   base-microservice:
     image: base-microservice:latest
     container_name: base-microservice
-    environment:
-      - SERVICE
-      - SIDECAR_ONE_IP = base-adapter:8081
+    environment: 
+      - SIDECAR_ONE_IP=base-adapter:8081
     ports:
       - "8080:8080"
+    depends_on:
+      - base-adapter
+  base-adapter:
+    image: base-adapter:latest
+    container_name: base-adapter
+    environment:
+      - ADAPTER_PORT=8081
+    ports:
+      - "8081:8081"

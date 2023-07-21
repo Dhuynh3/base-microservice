@@ -2,6 +2,7 @@ package ca.com.microservice.messages;
 
 import ca.com.microservice.businesslogic.BusinessLogic;
 import ca.com.microservice.utility.Logger;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.ext.web.RoutingContext;
 
 /**
@@ -17,7 +18,7 @@ public class MessageHandler {
         log.info("MessageHandler Constructor Called");
     }
 
-    public void handleMessageBody(Void handle) {
+    public void handleMessageBody(Buffer buffer) {
 
     }
 
@@ -25,7 +26,7 @@ public class MessageHandler {
         String pathParam = rc.pathParam("default");
         log.info("Middleware Filtering at : " + pathParam + "\n");
 
-        rc.addBodyEndHandler(this::handleMessageBody);
+        rc.request().bodyHandler(this::handleMessageBody);
 
         rc.response().end("Hey testing");
     }
@@ -38,7 +39,6 @@ public class MessageHandler {
      */
     public void handleStatus(RoutingContext rc) {
         log.info("[MessageHandler] : Handling '/status' Context");
-
-        
+        rc.response().end("Success");
     }
 }

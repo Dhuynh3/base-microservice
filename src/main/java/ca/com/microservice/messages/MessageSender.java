@@ -1,5 +1,6 @@
 package ca.com.microservice.messages;
 
+import ca.com.microservice.utility.Logger;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpClient;
@@ -36,6 +37,9 @@ public class MessageSender {
         client = vertx.createHttpClient(httpOption);
     }
     public static class HTTPBuilder {
+
+        Logger log = new Logger();
+
         private HttpMethod method = HttpMethod.GET;
         private String hostname;
         private String uri;
@@ -58,9 +62,11 @@ public class MessageSender {
             switch (method) {
                 case "GET": {
                     this.method = HttpMethod.GET;
+                    break;
                 }
                 case "POST": {
                     this.method = HttpMethod.POST;
+                    break;
                 }
                 default: {
                     this.method = HttpMethod.GET;
